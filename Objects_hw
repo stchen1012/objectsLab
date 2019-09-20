@@ -1,0 +1,95 @@
+// 2. Me
+const me = {
+    name: "Tracy",
+    age: 27,
+    email: "test@test.com"
+}
+
+console.log(me.name);
+me.age = 43;
+console.log(me.age);
+me["place of residence"] = "New York";
+console.log(me["place of residence"]);
+
+// 3. Slimer
+const monster = {
+   name: "Slimer",
+   color: "greenish",
+   type: "plasm or ghost or something"
+}
+
+console.log(monster.name);
+monster.type = "Creature";
+monster.age = 6;
+console.log(monster.type);
+console.log(monster.age);
+monster.introduce = function() {
+    console.log(`Hi, I am ${this.name} of type ${this.type} and I am ${this.color}.`)
+};
+monster.introduce();
+
+// 4. Ogres
+
+/* requirements
+Battle should play out automatically.
+Ogre and adventurer will take turns attacking each other - stats will be shown after each attack.
+Ogre's attacks has random damage value but adventurer always has same value attack.
+*/
+
+
+let adventurer = {
+    name: "Super Fly",
+    hitpoints: 50,
+    damage: 10,
+    attack: function() {
+        console.log(`Adventurer attacks and causes damage of ${this.damage}`)
+    },
+
+    takeDamage: function() {
+        this.hitpoints = this.hitpoints - ogre.currentRandomAttackValue;
+    },
+
+    displayStats: function() {
+        console.log(`Adventurer's HP now: ${this.hitpoints}`)
+    },
+
+    resetHitPoints: function() {
+        this.hitpoints = 50;
+    },
+}
+
+let ogre = {
+    name: "Giant",
+    hitpoints: 80,
+    currentRandomAttackValue: 0,
+    damage: function () {
+        return this.currentRandomAttackValue = Math.floor(Math.random()*10);
+    },
+    attack: function() {
+        console.log(`Ogre attacks and causes damage of ${this.damage()}`)
+    },
+    
+    takeDamage: function() {
+        this.hitpoints = this.hitpoints - adventurer.damage;
+    },
+
+    displayStats: function() {
+        console.log(`Ogre's HP is now: ${this.hitpoints}`)
+    },
+
+     resetHitPoints: function() {
+        this.hitpoints = 80;
+    },
+}
+
+while (adventurer.hitpoints >= 0 && ogre.hitpoints >= 0) {
+    adventurer.attack();
+    ogre.takeDamage();
+    ogre.displayStats();
+    ogre.attack();
+    adventurer.takeDamage();
+    adventurer.displayStats();
+}
+
+console.log((adventurer.hitpoints > 0) ? "Adventurer wins" : "Ogre wins");
+
